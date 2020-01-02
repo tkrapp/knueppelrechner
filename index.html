@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="app.css">
+
+  <title>Knüppelrechner</title>
+</head>
+<body>
+  <div class="container-md">
+    <h1>Knüppelrechner</h1>
+
+    <div class="card shadow mb-5">
+      <div class="card-body">
+        <h2 class="card-title">Teilnehmer</h2>
+        <table class="card-text table table-sm table-striped">
+          <thead class="thead-light">
+            <tr class="d-flex">
+              <th class="col-5">Name</th class="col-5">
+              <th class="col-4" id="head-amount"><abbr title="Anzahl">#</abbr> Knüppel</th class="col-5">
+              <th class="col-3">Aktionen</th class="col-2">
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ko foreach: participants -->
+            <tr class="d-flex">
+              <td class="col-5"><input class="form-control form-control-sm" type="text" step="0.5" min="1" data-bind="textInput: name" /></td>
+              <td class="col-4"><input class="form-control form-control-sm" type="number" step="0.5" min="1" data-bind="textInput: quantity" /></td class="col-3">
+              <td class="col-3"><button class="btn btn-secondary btn-sm" data-bind="click: $root.removeParticipant" title="Teilnehmer entfernen">Entf.</button></td class="col-3">
+            </tr>
+            <!-- /ko -->
+            <!-- ko ifnot: participants().length -->
+            <tr class="d-flex">
+              <td class="col-12" colspan="3">Bitte füge Personen hinzu.</td>
+            </tr>
+            <!-- /ko -->
+            <tr class="d-flex">
+              <th class="col-5" id="head-total">Gesamt</th>
+              <td class="col-7" colspan="2" headers="head-amount head-total">
+                <div data-bind="text: totalOrder().toFixed(1), css: { 'no-complete-club': !Number.isInteger(totalOrder()) }"></div>
+                <small data-bind="ifnot: Number.isInteger(totalOrder())">Wer isst den restlichen Knüppel?</small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <form data-bind="submit: addParticipant" class="form-grid person-input-form">
+          <input id="person-name" class="form-control" id="newParticipantName" data-bind="textInput: newParticipant.name" list="favourite-people" placeholder="Name" aria-label="Name" />
+          <datalist id="favourite-people">
+            <option>Michi</option>
+            <option>Tom</option>
+          </datalist>
+          <input id="person-quantity" class="form-control" type="number" step="0.5" min="1" data-bind="textInput: newParticipant.quantity" />
+          <div id="person-save-button" >
+            <button class="btn btn-primary" type="submit">Person hinzufügen</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="shadow p-3 mb-5 bg-white rounded">
+      <h2>Einkauf</h2>
+      <table class="table table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+            <th>Kosten</th>
+            <th>Zuordnung</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: orderItems">
+          <tr>
+            <td><input class="form-control" data-bind="value: name" /></td>
+            <td>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">€</div>
+                </div>
+                <input class="form-control" type="number" step="0.01" min="0.01" data-bind="textInput: price" />
+              </div>
+            </td>
+            <td><select class="form-control" data-bind="options: $root.participantsOrCommon, optionsText: 'name', value: assignedParticipant"></select></td>
+            <td><button class="btn btn-sm btn-secondary" data-bind="click: $root.removeOrderItem">Remove</button></td>
+          </tr>
+        </tbody>
+        <tbody data-bind="ifnot: orderItems().length">
+          <tr>
+            <td colspan="4">Bitte füge Einkäufe hinzu</td>
+          </tr>
+        </tbody>
+      </table>
+      <form data-bind="submit: addOrderItem" class="form-grid order-input-form">
+        <input class="form-control" id="item-name" data-bind="textInput: newOrderItem.name" placeholder="Name" list="favourite-items" />
+        <datalist id="favourite-items">
+          <option>Wurst</option>
+          <option>Käse</option>
+        </datalist>
+        <div class="input-group" id="item-price">
+          <div class="input-group-prepend">
+            <div class="input-group-text">€</div>
+          </div>
+          <input class="form-control" type="number" step="0.01" min="0.01" data-bind="textInput: newOrderItem.price" />
+        </div>
+        <select class="form-control" id="item-assigned-person" data-bind="options: participantsOrCommon, optionsText: 'name', value: newOrderItem.assignedParticipant"></select>
+        <div id="item-add">
+          <button class="btn btn-primary" type="submit">Position hinzufügen</button>
+        </div>
+      </form>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded">
+      <h2>Kostenzuordnung</h2>
+      <table class="table table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+            <th>Kosten</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: costsPerParticipant">
+          <tr>
+            <td data-bind="text: name"></td>
+            <td data-bind="text: costs"></td>
+          </tr>
+        </tbody>
+        <tbody data-bind="ifnot: costsPerParticipant().length">
+          <tr>
+            <td colspan="2">Bitte füge Teilnehmer und Einkäufe hinzu</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="app.js" type="module"></script>
+</body>
