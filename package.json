@@ -1,0 +1,39 @@
+{
+  "name": "knueppelrechner",
+  "version": "1.0.0",
+  "description": "Calculate the amount of money people have to pay if one buys a meal for all.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server -d --env development --content-base dist",
+    "build": "webpack --env production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "bla"
+  },
+  "author": "Thomas Krapp, Jan Schilling",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "feather-icons": "^4.25.0",
+    "jquery": "^3.4.1",
+    "knockout": "^3.5.1",
+    "popper.js": "^1.16.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "babel-loader": "^8.0.6",
+    "css-entry-webpack-plugin": "^1.0.0-beta.4",
+    "css-loader": "^3.4.0",
+    "file-loader": "^5.0.2",
+    "http-server": "^0.12.0",
+    "mini-css-extract-plugin": "^0.8.2",
+    "style-loader": "^1.0.2",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
+  }
+}

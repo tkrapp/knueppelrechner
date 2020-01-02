@@ -1,0 +1,101 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.no-complete-club {
+    color: red;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-rows: auto;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+}
+
+.person-input-form {
+    grid-template-areas: "nameinput nameinput amountinput finishbutton";
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#person-name {
+    grid-area: nameinput;
+}
+
+#person-quantity {
+    grid-area: amountinput;
+}
+
+#person-save-button {
+    grid-area: finishbutton;
+}
+
+.order-input-form {
+    grid-template-areas: "item-name item-price item-assigned-person item-assigned-person item-add item-add";
+    grid-template-columns: repeat(6, 1fr);
+}
+
+#item-name {
+    grid-area: item-name;
+}
+
+#item-price {
+    grid-area: item-price;
+}
+#item-price input {
+    text-align: right;
+}
+
+
+#item-assigned-person {
+    grid-area: item-assigned-person;
+}
+
+#item-add {
+    grid-area: item-add;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .person-input-form {
+        grid-template-areas: 
+            "nameinput nameinput amountinput amountinput"
+            "finishbutton finishbutton finishbutton finishbutton";
+    }
+
+    .order-input-form {
+        grid-template-areas: 
+            "item-name item-name item-name item-price item-price item-price"
+            "item-assigned-person item-assigned-person item-assigned-person item-assigned-person item-assigned-person item-assigned-person"
+            "item-add item-add item-add item-add item-add item-add";
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .person-input-form {
+        grid-template-areas: "nameinput amountinput finishbutton finishbutton";
+    }
+
+    .order-input-form {
+        grid-template-areas: 
+            "item-name item-name item-price item-price item-assigned-person item-assigned-person"
+            "item-add item-add item-add item-add item-add item-add";
+    }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .person-input-form {
+        grid-template-areas: "nameinput amountinput finishbutton finishbutton";
+    }
+
+    .order-input-form {
+        grid-template-areas: 
+            "item-name item-name item-price item-price item-assigned-person item-assigned-person"
+            "item-add item-add item-add item-add item-add item-add";
+    }
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+}
